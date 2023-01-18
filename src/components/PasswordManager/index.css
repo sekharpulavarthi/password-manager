@@ -1,0 +1,154 @@
+.password-manager-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: #9ba9eb;
+  padding: 30px;
+}
+
+.password-manager-sub-container {
+  background-color: #5763a5;
+  display: flex;
+  padding: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+
+.password-manager-logo {
+  width: 130px;
+  height: 50px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+
+.form {
+  background-color: #454f84;
+  padding: 15px;
+  border-radius: 7px;
+}
+
+.heading {
+  color: white;
+  font-size: 20px;
+}
+
+.input-element-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  background-color: white;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  width: 300px;
+  padding-left: 3px;
+}
+
+.password-manager-image {
+  width: 300px;
+  height: 300px;
+}
+
+.input-logo-container {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #94a3b8;
+}
+
+.input-logo {
+  width: 20px;
+}
+
+.input-element {
+  border: 0px;
+  outline: none;
+  background-color: white;
+  margin-left: 3px;
+}
+
+.add-button {
+  background-color: #0b69ff;
+  color: white;
+  padding: 7px;
+  border: 0px;
+  width: 70px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.list-of-passwords-container {
+  background-color: #5763a5;
+  padding: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 6px;
+  margin-top: 13px;
+}
+
+.nav-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 25px;
+  background-color: white;
+  border-radius: 3px;
+  width: 300px;
+  padding-left: 3px;
+}
+
+.search-logo-container {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #94a3b8;
+}
+
+.search-icon {
+  width: 15px;
+}
+
+.search-input {
+  border: 0px;
+  outline: none;
+  background-color: white;
+  margin-left: 3px;
+}
+
+.your-passwords-text {
+  color: white;
+  font-weight: bold;
+}
+
+.password-length {
+  border: 1px solid white;
+  padding: 0px 3px 0px 3px;
+}
+
+.checkbox-element {
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.show-passwords-label {
+  color: white;
+  font-size: 17px;
+}
+
+.show-passwords-container {
+  display: flex;
+}

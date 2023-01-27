@@ -1,5 +1,17 @@
 import {Component} from 'react'
+import {v4 as uuidv4} from 'uuid'
 import './index.css'
+import PasswordItem from '../PasswordItem'
+
+const initialContainerBackgroundClassNames = [
+  'amber',
+  'blue',
+  'orange',
+  'emerald',
+  'teal',
+  'red',
+  'light-blue',
+]
 
 class PasswordManager extends Component {
   state = {
@@ -8,11 +20,34 @@ class PasswordManager extends Component {
     passwordInput: '',
     passwordsList: [],
     searchInput: '',
-    showPasswords: false,
+    showPasswords: true,
   }
 
   onAddPasswordItem = event => {
     event.preventDefault()
+    const {websiteInput, usernameInput, passwordInput} = this.state
+
+    const initialBackgroundColorClassName = `first-letter-container ${
+      initialContainerBackgroundClassNames[
+        Math.ceil(
+          Math.random() * initialContainerBackgroundClassNames.length - 1,
+        )
+      ]
+    }`
+    const passwordItem = {
+      id: uuidv4(),
+      websiteInput,
+      usernameInput,
+      passwordInput,
+      initialClassName: initialBackgroundColorClassName,
+    }
+
+    this.setState(prevState => ({
+      passwordsList: [...prevState.passwordsList, passwordItem],
+      websiteInput: '',
+      usernameInput: '',
+      passwordInput: '',
+    }))
   }
 
   onChangeWebsiteInput = event => {
@@ -31,8 +66,30 @@ class PasswordManager extends Component {
     this.setState({searchInput: event.target.value})
   }
 
+  onSelectCheckbox = () => {
+    this.setState(prevState => ({showPasswords: !prevState.showPasswords}))
+  }
+
+  deletePassword = passwordId => {
+    const {passwordsList} = this.state
+    this.setState({
+      passwordsList: passwordsList.filter(
+        passwordItem => passwordItem.id !== passwordId,
+      ),
+    })
+  }
+
+  getSearchedPasswords = () => {
+    const {passwordsList, searchInput} = this.state
+    const searchResults = passwordsList.filter(password =>
+      password.websiteInput.toLowerCase().includes(searchInput.toLowerCase()),
+    )
+    return searchResults
+  }
+
   renderForm = () => {
-    const {websiteInput, usernameInput, passwordInput, searchInput} = this.state
+    const {websiteInput, usernameInput, passwordInput} = this.state
+
     return (
       <form className="form" onSubmit={this.onAddPasswordItem}>
         <h1 className="heading">Add New Password</h1>
@@ -92,7 +149,9 @@ class PasswordManager extends Component {
   }
 
   renderNavbar = () => {
-    const {passwordsList, searchInput} = this.state
+    const {passwordsList, searchInput, showPasswords} = this.state
+    const searchedPasswords = this.getSearchedPasswords()
+    const noPasswords = searchedPasswords.length === 0
     return (
       <div className="list-of-passwords-container">
         <div className="nav-bar-container">
@@ -118,6 +177,36 @@ class PasswordManager extends Component {
           </div>
         </div>
         <hr />
+        <div className="show-passwords-container">
+          <input
+            type="checkbox"
+            onChange={this.onSelectCheckbox}
+            value={this.showPasswords}
+            className="checkbox-element"
+            id="showPasswords"
+          />
+          <label htmlFor="showPasswords" className="show-passwords-label">
+            Show Passwords
+          </label>
+        </div>
+        {noPasswords ? (
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/no-passwords-img.png"
+            alt="no passwords"
+            className="no-passwords-view"
+          />
+        ) : (
+          <div className="password-items-container">
+            {searchedPasswords.map(passwordItem => (
+              <PasswordItem
+                key={passwordItem.id}
+                passwordDetails={passwordItem}
+                showPasswords={showPasswords}
+                deletePassword={this.deletePassword}
+              />
+            ))}
+          </div>
+        )}
       </div>
     )
   }
@@ -139,18 +228,6 @@ class PasswordManager extends Component {
           />
         </div>
         {this.renderNavbar()}
-        <div className="show-passwords-container">
-          <input
-            type="checkbox"
-            onChange={this.onSelectCheckbox}
-            value={this.showPasswords}
-            className="checkbox-element"
-            id="showPasswords"
-          />
-          <label htmlFor="showPasswords" className="show-passwords-label">
-            Show Passwords
-          </label>
-        </div>
       </div>
     )
   }

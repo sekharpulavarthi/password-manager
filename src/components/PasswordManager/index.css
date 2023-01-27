@@ -89,6 +89,7 @@
   margin-right: 50px;
   border-radius: 6px;
   margin-top: 13px;
+  height: 100vh;
 }
 
 .nav-bar-container {
@@ -151,4 +152,16 @@
 
 .show-passwords-container {
   display: flex;
+  justify-content: flex-end;
+}
+
+.password-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  overflow: auto;
+}
+
+.no-passwords-view {
+  width: 300px;
 }
